@@ -1,0 +1,12 @@
+server:
+  port: 7016
+
+spring:
+  application:
+    name: service-price
+
+logging:
+  config: classpath:logback.xml
+  level:
+    root: info
+    com.niu.security.priceapi: debug
