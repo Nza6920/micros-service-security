@@ -1,0 +1,51 @@
+server:
+  port: 7056
+
+spring:
+  application:
+    name: service-gateway
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/imooc-security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
+    generate-ddl: false
+
+logging:
+  config: classpath:logback.xml
+  level:
+    root: info
+    com.niu.security.orderapi: debug
+
+zuul:
+  # 配置转发路由
+  routes:
+    token:
+      url: http://auth.niu.com:7046
+    order:
+      url: http://order.niu.com:7026
+  # 设置敏感头为空
+  sensitive-headers:
+  ratelimit:
+    enabled: true
+    repository: jpa
+    # 默认配置
+    default-policy-list:
+      # 1s 两个请求 时间不能超过 1 s
+      - limit: 2
+        quota: 1
+        refresh-interval: 1
+        type:
+          - url
+          - httpmethod
+    policy-list:
+      # 指定路由规则
+      token:
+        - limit: 2
+          quota: 1
+          refresh-interval: 3
+          type:
+            - url
+            - httpmethod

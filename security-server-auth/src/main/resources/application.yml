@@ -1,0 +1,17 @@
+server:
+  port: 7046
+
+spring:
+  application:
+    name: service-auth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/imooc-security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+logging:
+  config: classpath:logback.xml
+  level:
+    root: info
+    com.niu.security.orderapi: debug

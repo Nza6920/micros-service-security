@@ -1,0 +1,17 @@
+server:
+  port: 7086
+
+spring:
+  application:
+    name: service-login
+
+logging:
+  level:
+    root: info
+    com.niu.security.priceapi: debug
+
+zuul:
+  routes:
+    api:
+      url: http://gateway.niu.com:7056
+  sensitive-headers:
