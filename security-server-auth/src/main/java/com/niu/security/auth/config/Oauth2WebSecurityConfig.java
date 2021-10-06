@@ -23,7 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class Oauth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] AUTH_LIST = new String[]{"/oauth/revokeToken", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/api-docs/**", "/actuator", "/actuator/health", "/actuator/health/**"};
+    private static final String[] AUTH_LIST = new String[]{"/oauth/**", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/api-docs/**", "/actuator", "/actuator/health", "/actuator/health/**"};
 
     @Autowired
     private UserDetailsService userDetailsService;

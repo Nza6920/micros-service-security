@@ -39,8 +39,8 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
-    public void logout(@RequestHeader("Authorization") String authHeader) {
-        doLogout(authHeader);
+    public void logout(@RequestHeader("Authorization") String authHeader, HttpServletRequest request) {
+        doLogout(authHeader, request);
     }
 
 
@@ -51,13 +51,15 @@ public class LoginController {
      * @author [nza]
      * @createTime 2021/10/6 14:31
      */
-    private void doLogout(String authHeader) {
+    private void doLogout(String authHeader, HttpServletRequest request) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", authHeader);
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(null, headers);
 
         ResponseEntity<Object> responseEntity = restTemplate.exchange(logoutUrl, HttpMethod.POST, entity, Object.class);
+
+        request.getSession().invalidate();
 
         log.info("token logout: {}", responseEntity.getBody());
     }
