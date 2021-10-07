@@ -6,7 +6,7 @@ spring:
     name: service-order
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
   level:
     root: info
     com.niu.security.orderapi: debug

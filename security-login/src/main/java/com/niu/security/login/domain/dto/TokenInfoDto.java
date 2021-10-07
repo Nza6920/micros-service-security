@@ -32,6 +32,9 @@ public class TokenInfoDto {
     }
 
     public boolean isExpired() {
+        if (expireTime == null) {
+            return false;
+        }
         return expireTime.isBefore(LocalDateTime.now());
     }
 }
