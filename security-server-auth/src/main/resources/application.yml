@@ -1,5 +1,8 @@
 server:
   port: 7046
+  servlet:
+    session:
+      timeout: 2592000
 
 spring:
   application:
@@ -14,4 +17,5 @@ logging:
   config: classpath:logback.xml
   level:
     root: info
-    com.niu.security.orderapi: debug
+    com.niu.security.auth: debug
+

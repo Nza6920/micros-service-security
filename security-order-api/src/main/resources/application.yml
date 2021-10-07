@@ -1,12 +1,12 @@
 server:
-  port: 7016
+  port: 7026
 
 spring:
   application:
     name: service-order
 
 logging:
-#  config: classpath:logback.xml
+  config: classpath:logback.xml
   level:
     root: info
     com.niu.security.orderapi: debug

@@ -6,9 +6,10 @@ spring:
     name: service-login
 
 logging:
+  config: classpath:logback.xml
   level:
     root: info
-    com.niu.security.priceapi: debug
+    com.niu.security.orderapi: debug
 
 zuul:
   routes:
