@@ -49,3 +49,13 @@ zuul:
           type:
             - url
             - httpmethod
+
+security:
+  oauth2:
+    client:
+      client-id: gateway
+      client-secret: 123456
+    resource:
+      jwt:
+        # 配置公钥获取地址
+        key-uri: http://auth.niu.com:7046/oauth/token_key

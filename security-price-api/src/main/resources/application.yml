@@ -10,3 +10,12 @@ logging:
   level:
     root: info
     com.niu.security.priceapi: debug
+
+security:
+  oauth2:
+    client:
+      client-id: orderService
+      client-secret: 123456
+    resource:
+      jwt:
+        key-uri: http://auth.niu.com:7046/oauth/token_key

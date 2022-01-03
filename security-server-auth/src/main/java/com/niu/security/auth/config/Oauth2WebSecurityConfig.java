@@ -72,5 +72,4 @@ public class Oauth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessHandler(logoutSuccessHandler);
     }
-
 }

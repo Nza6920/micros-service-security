@@ -3,6 +3,7 @@ package com.niu.security.priceapi.price;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,10 @@ public class PriceController {
 
     @GetMapping("/{id}")
     @ApiOperation("get price")
-    public PriceInfo getPrice(@PathVariable Long id) {
+    public PriceInfo getPrice(@PathVariable Long id, @AuthenticationPrincipal String user) {
+
+        log.info("user: {}", user);
+
         PriceInfo priceInfo = new PriceInfo();
         priceInfo.setId(id)
                 .setPrice(new BigDecimal("100"));

@@ -10,3 +10,13 @@ logging:
   level:
     root: info
     com.niu.security.orderapi: debug
+
+security:
+  oauth2:
+    client:
+      client-id: orderService
+      client-secret: 123456
+    resource:
+      jwt:
+        # 配置令牌公钥地址
+        key-uri: http://auth.niu.com:7046/oauth/token_key
