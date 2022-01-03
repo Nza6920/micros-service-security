@@ -1,10 +1,10 @@
 package com.niu.security.orderapi.order;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,16 @@ public class OrderController {
     @PostMapping
     @ApiOperation("create order")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public OrderInfo create(@RequestBody OrderInfo info) {
+    @SentinelResource("createOrder")
+    public OrderInfo create(@RequestBody OrderInfo info, @AuthenticationPrincipal String username) {
+
+        // 创建 sentinel 资源
+        //        try (Entry entry = SphU.entry("createOrder")){
+        //            log.info("user is " + username);
+        //        } catch (Exception e) {
+        //            log.error("Blocked!");
+        //        }
+
         PriceInfo priceInfo = oAuth2RestTemplate.getForObject("http://localhost:7016/price/" + info.getProductId(), PriceInfo.class);
         log.debug("price is {}", priceInfo.getPrice());
         return info;

@@ -1,0 +1,5 @@
+127.0.0.1 gateway.niu.com
+127.0.0.1 auth.niu.com
+127.0.0.1 order.niu.com
+127.0.0.1 price.niu.com
+127.0.0.1 login.niu.com

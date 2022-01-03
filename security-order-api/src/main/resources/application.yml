@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: service-order
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:9099
+        port: 8719
 
 logging:
   config: classpath:logback-spring.xml
@@ -20,3 +25,5 @@ security:
       jwt:
         # 配置令牌公钥地址
         key-uri: http://auth.niu.com:7046/oauth/token_key
+
+
