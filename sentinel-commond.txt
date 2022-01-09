@@ -1,1 +1,5 @@
+# sentinel jar 启动命令
 java -Dserver.port=9099 -Dcsp.sentinel.dashboard.server=localhost:9099 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.6.3.jar
+
+# sentinel 项目启动配置
+-Dcsp.sentinel.dashboard.server=localhost:9099

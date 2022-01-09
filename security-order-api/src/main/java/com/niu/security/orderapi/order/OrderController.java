@@ -1,6 +1,7 @@
 package com.niu.security.orderapi.order;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +30,14 @@ public class OrderController {
     @PostMapping
     @ApiOperation("create order")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @SentinelResource("createOrder")
+    @SentinelResource(value = "createOrder", blockHandler = "doOnBlock", fallback = "doFallback")
     public OrderInfo create(@RequestBody OrderInfo info, @AuthenticationPrincipal String username) {
+
+        try {
+            Thread.sleep(20);
+        } catch (Exception e) {
+            log.info("sleep.............");
+        }
 
         // 创建 sentinel 资源
         //        try (Entry entry = SphU.entry("createOrder")){
@@ -51,5 +58,17 @@ public class OrderController {
         log.info("user is: {}", username);
 
         return new OrderInfo(id, id * 2);
+    }
+
+    /**
+     * 处理熔断
+     *
+     * @return {@link OrderInfo}
+     * @author [nza]
+     * @createTime 2022/1/9 22:44
+     */
+    public OrderInfo doOnBlock(@RequestBody OrderInfo info, @AuthenticationPrincipal String username, BlockException blockException) {
+        log.info("blocked by " + blockException.getClass().getSimpleName());
+        return info;
     }
 }
