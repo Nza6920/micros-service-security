@@ -30,8 +30,12 @@ public class OrderController {
     @PostMapping
     @ApiOperation("create order")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @SentinelResource(value = "createOrder", blockHandler = "doOnBlock", fallback = "doFallback")
+    @SentinelResource(value = "createOrder", blockHandler = "doOnBlock")
     public OrderInfo create(@RequestBody OrderInfo info, @AuthenticationPrincipal String username) {
+
+        if (info.getId() == 1) {
+            throw new RuntimeException("11");
+        }
 
         try {
             Thread.sleep(20);
@@ -53,10 +57,10 @@ public class OrderController {
 
     @GetMapping("/{id}")
     @ApiOperation("get order info")
+    @SentinelResource("getOrderInfo")
     public OrderInfo getOrderInfo(@PathVariable Long id, @ApiIgnore @AuthenticationPrincipal String username) {
         log.info("order id: {}", id);
         log.info("user is: {}", username);
-
         return new OrderInfo(id, id * 2);
     }
 
@@ -68,7 +72,7 @@ public class OrderController {
      * @createTime 2022/1/9 22:44
      */
     public OrderInfo doOnBlock(@RequestBody OrderInfo info, @AuthenticationPrincipal String username, BlockException blockException) {
-        log.info("blocked by " + blockException.getClass().getSimpleName());
+        log.error("blocked by " + blockException.getClass().getSimpleName());
         return info;
     }
 }

@@ -50,5 +50,9 @@ public class SentinelConfig implements ApplicationListener<ContextRefreshedEvent
         List<DegradeRule> degradeRules = Lists.newArrayList();
         degradeRules.add(degradeRule);
         DegradeRuleManager.loadRules(degradeRules);
+
+        // 设置参数限流规则
+        //        ParamFlowRule paramFlowRule = new ParamFlowRule();
+        //        paramFlowRule.setResource("getOrderInfo");
     }
 }
